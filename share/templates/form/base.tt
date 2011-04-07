@@ -1,0 +1,10 @@
+<@ PROCESS form/prebase.tt @>
+<div class="form_base form_base_<@ form.name @>">
+	<@ PROCESS form/label.tt @>
+	<@ PROCESS form/fields.tt @>
+	<div class="form_row form_submiterror form_submiterror_<@ form.name @>">
+		<@ PROCESS form/form/submit.tt @>
+		<@ PROCESS form/form/error.tt @>
+	</div>
+</div>
+<@ PROCESS form/postbase.tt @>

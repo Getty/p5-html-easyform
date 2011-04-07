@@ -1,0 +1,3 @@
+<div class="form_error form_error_<@ form.name @>">
+	<!-- TODO general form error -->
+</div>

@@ -1,0 +1,3 @@
+<@ FOREACH field IN form.fields @>
+	<@ INCLUDE form/field.tt @>
+<@ END @>

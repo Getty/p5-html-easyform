@@ -1,0 +1,5 @@
+<@ FOR option IN field.options @>
+  <input type="radio" value="<@ option.value @>" name="<@ field.html_name @>"<@ IF option.value == field.fif @> checked="checked"<@ END @>>
+  <@ option.label @><br />
+<@ END @>
+ 

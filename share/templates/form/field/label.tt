@@ -1,0 +1,3 @@
+<@ IF field.label @>
+	<label for="<@ field.html_name @>"><@ field.loc_label @><@ IF field.required @><@ PROCESS form/field/mandatoryfield.tt @><@ END @></label>
+<@ END @>

@@ -1,0 +1,10 @@
+<select name="<@ field.html_name @>" <@ IF field.multiple @>multiple="multiple" size="<@ field.size @>" <@ END @>>
+  <@ FOR option IN field.options @>
+    <option value="<@ option.value @>" 
+    <@ FOREACH selval IN field.fif @>
+      <@ IF selval == option.value @>selected="selected"<@ END @>
+    <@ END @>>
+    <@ option.label | html @></option>
+  <@ END @> 
+</select>
+

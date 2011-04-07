@@ -1,0 +1,13 @@
+<div id="form_field_row_<@ field.id @>" class="form_row form_field_row form_field_compound_row">
+	<div id="form_field_label_<@ field.id @>" class="form_field_label form_field_label_<@ form.id @>" <@ IF form.vertical_cell @> style="float:none"<@ END @>>
+		<@ PROCESS form/field/label.tt @>
+	</div>
+</div>
+<@ FOREACH repeatfield = field.fields @>
+	<@ FOREACH subfield = repeatfield.fields @>
+		<@ PROCESS form/field.tt field=subfield @>
+	<@ END @>
+<@ END @>
+<div id="form_field_row_<@ field.id @>_add" class="form_row form_field_row form_field_repeatable_add_row">
+	<a href=""><@ field.addlabel || "Add" @></a>
+</div>

@@ -1,0 +1,17 @@
+<@ IF field.full || field.is_compound || field.widget == 'hidden' @>
+	<@ PROCESS form/field/widget.tt @>
+<@ ELSE @>
+	<div id="form_field_row_<@ field.id @>" class="form_row form_field_row">
+		<div id="form_field_label_<@ field.id @>" class="form_field_label form_field_label_<@ form.id @>" <@ IF form.vertical_cell @> style="float:none"<@ END @>>
+			<@ PROCESS form/field/label.tt @>
+		</div>
+		<div id="form_field_widget_<@ field.id @>" class="form_field_widget form_field_widget_<@ form.id @>" <@ IF form.vertical_cell @> style="float:none"<@ END @>>
+			<@ PROCESS form/field/widget.tt @>
+		</div>
+	</div>
+<@ END @>
+<@ IF field.all_errors @>
+	<div id="form_field_row_error_<@ field.id @>" class="form_row form_field_row_error">
+		<@ PROCESS form/field/error.tt @>
+	</div>
+<@ END @>
