@@ -5,28 +5,62 @@ use Moose;
 extends 'HTML::FormHandler';
 
 use File::Spec;
-use File::ShareDir;
+use File::ShareDir::ProjectDistDir;
 
-sub template_dir {
+sub template_dir { File::Spec->rel2abs( File::Spec->catfile( dist_dir('HTML-EasyForm'), 'templates' ) ) };
+
+sub easy {
 	my $class = shift;
-	my ($volume, $directory, $file) = File::Spec->splitpath( File::Spec->rel2abs(__FILE__) );
-	my $devdir = File::Spec->catfile( $volume, $directory, File::Spec->updir(), File::Spec->updir(), 'share', 'templates' );
-	return $devdir if -d $devdir;
-	my $dir = File::ShareDir::dist_dir('HTML-EasyForm');
-	return File::Spec->catfile( $dir, 'templates' ) if $dir;
+	my %args;
+	%args = %{$_[0]} if (@_ == 1);
+	%args = @_ if (@_ > 1);
+	my %process;
+	my $params = delete $args{params};
+	$process{params} = $params if $params;
+	my $action = delete $args{action};
+	$process{action} = $action if $action;
+	my $item = delete $args{item};
+	$process{item} = $item if $item;
+	my $item_id = delete $args{item_id};
+	$process{item_id} = $item if $item_id;
+	my $schema = delete $args{schema};
+	$process{schema} = $item if $schema;
+	my $form = $class->new(\%args);
+	$form->is_submitted($params->{$form->name} ? 1 : 0) if $params;
+	$form->process(%process);
+	return $form;
 }
+
+sub validated {
+	my $self = shift;
+	return $self->next::method(@_) if ($self->is_submitted);
+	return 0;
+}
+
+has is_submitted => (
+	isa => 'Bool',
+	is => 'rw',
+	default => sub { 0 },
+);
+
+has template => (
+	isa => 'Str',
+	is => 'rw',
+	lazy => 1,
+	default => sub { 'form.tt' },
+);
 
 has '+name' => (
 	default => sub {
 		my $self = shift;
 		my $name = lc(ref $self);
 		$name =~ s!::!_!g;
-		my $form_id = $self->form_id;
+		my $form_id = $self->fid;
 		return $name.$form_id;
 	},
 );
 
-has form_id => (
+has fid => (
 	isa => 'Str',
 	is => 'ro',
 	lazy => 1,
@@ -46,6 +80,12 @@ has '+widget_name_space' => (
 has '+field_name_space' => (
 	default => sub {[qw(
 		HTML::EasyForm::Field
+	)]},
+);
+
+has '+field_traits' => (
+	default => sub {[qw(
+		HTML::EasyForm::Trait::Field
 	)]},
 );
 
@@ -77,12 +117,38 @@ Your formclass:
 
   1;
 
+In your favorite web framework:
+
+  my $form = MyApp::Form::Mini->easy({
+    action => $c->uri_for($c->action,$c->req->captures),
+    params => $c->req->parameters,
+  });
+
+  if ($form->validated) {
+    ... do stuff with $form->value ...
+  }
+
+  my $other_form = HTML::EasyForm->easy({
+    name => 'my_custom_form',
+    fid => $some_id_per_usage,
+    action => $c->uri_for($c->action,$c->req->captures),
+    params => $c->req->parameters,
+    item => \%values,
+    field_list => [
+      field_one => {
+        type => 'Text',
+        required => 1
+      },
+      field_two => 'Text',
+    ],
+  });
+
 In your template (suggesting the form is assigned as B<form>):
 
   <@ PROCESS form.tt @>
 
 or:
 
-  <@ PROCESS form.tt form=myform @>  
+  <@ PROCESS form.tt form=other_form @>  
 
 =cut
