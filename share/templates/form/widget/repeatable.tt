@@ -5,9 +5,12 @@
 </div>
 <@ FOREACH repeatfield = field.fields @>
 	<@ FOREACH subfield = repeatfield.fields @>
-		<@ PROCESS form/field.tt field=subfield @>
+		<@ INCLUDE form/field.tt field=subfield @>
 	<@ END @>
+	<div id="form_field_row_<@ repeatfield.id @>_delete" class="form_row form_field_row form_field_repeatable_delete_row">
+		<input type="submit" name="<@ repeatfield.html_name @>.delete" id="<@ repeatfield.id @>_delete" value="<@ field.loc_dellabel || "Delete" @>" />
+	</div>
 <@ END @>
 <div id="form_field_row_<@ field.id @>_add" class="form_row form_field_row form_field_repeatable_add_row">
-	<a href=""><@ field.addlabel || "Add" @></a>
+	<input type="submit" name="<@ field.html_name @>_add" id="<@ field.id @>_add" value="<@ field.loc_addlabel || "Add" @>" />
 </div>

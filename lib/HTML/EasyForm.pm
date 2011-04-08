@@ -14,20 +14,22 @@ sub easy {
 	my %args;
 	%args = %{$_[0]} if (@_ == 1);
 	%args = @_ if (@_ > 1);
-	my %process;
-	my $params = delete $args{params};
-	$process{params} = $params if $params;
-	my $action = delete $args{action};
-	$process{action} = $action if $action;
-	my $item = delete $args{item};
-	$process{item} = $item if $item;
-	my $item_id = delete $args{item_id};
-	$process{item_id} = $item if $item_id;
-	my $schema = delete $args{schema};
-	$process{schema} = $item if $schema;
+	die __PACKAGE__." needs params" if !defined $args{params};
+	# my %process;
+	# my $params = delete $args{params};
+	# $process{params} = $params if $params;
+	# my $action = delete $args{action};
+	# $process{action} = $action if $action;
+	# my $item = delete $args{item};
+	# $process{item} = $item if $item;
+	# my $item_id = delete $args{item_id};
+	# $process{item_id} = $item_id if $item_id;
 	my $form = $class->new(\%args);
-	$form->is_submitted($params->{$form->name} ? 1 : 0) if $params;
-	$form->process(%process);
+	$form->is_submitted($args{params}->{$form->name} ? 1 : 0);
+	if (!$form->is_submitted && $form->has_params) {
+		$_->check_params for ($form->all_fields);
+	}
+	$form->process;
 	return $form;
 }
 
@@ -36,6 +38,12 @@ sub validated {
 	return $self->next::method(@_) if ($self->is_submitted);
 	return 0;
 }
+
+has vertical_cell => (
+	isa => 'Bool',
+	is => 'rw',
+	default => sub { 0 },
+);
 
 has is_submitted => (
 	isa => 'Bool',

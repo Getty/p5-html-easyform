@@ -1,12 +1,12 @@
 <@ IF field.full @>
-	<@ PROCESS $field.template @>
+	<@ INCLUDE $field.template @>
 <@ ELSE @>
 	<div id="form_field_row_<@ field.id @>" class="form_row form_field_row">
-		<div id="form_field_label_<@ field.id @>" class="form_field_label form_field_label_<@ form.id @>" <@ IF form.vertical_cell @> style="float:none"<@ END @>>
+		<div id="form_field_label_<@ field.id @>" class="form_field_label form_field_label_<@ form.id @>" <@ IF field.vertical_cell || form.vertical_cell @> style="float:none"<@ END @>>
 			<@ PROCESS form/field/label.tt @>
 		</div>
-		<div id="form_field_widget_<@ field.id @>" class="form_field_widget form_field_widget_<@ form.id @>" <@ IF form.vertical_cell @> style="float:none"<@ END @>>
-			<@ PROCESS $field.template @>
+		<div id="form_field_widget_<@ field.id @>" class="form_field_widget form_field_widget_<@ form.id @>" <@ IF field.vertical_cell || form.vertical_cell @> style="float:none"<@ END @>>
+			<@ INCLUDE $field.template @>
 		</div>
 	</div>
 <@ END @>
