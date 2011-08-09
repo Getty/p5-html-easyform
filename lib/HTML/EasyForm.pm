@@ -70,7 +70,6 @@ has id => (
 sub _build_default_field_class { 'HTML::EasyForm::Field' }
 
 has '+field_namespace' => (
-	lazy => 1,
 	default => sub { 'HTML::EasyForm::Field' },
 );
 
@@ -94,17 +93,19 @@ In your L<Template::Toolkit> configuration:
 In your favorite web framework:
 
   $c->stash->{form} = HTML::EasyForm->easy({
-    name => 'test',
-      fields => {
-      name => {
+    name => 'testform',
+    fields => [
+      {
+        name => 'testfield',
         notempty => 1,
-        widget => 'text',
-        label => 'Name of new site',
       },
+    ],
+    input_values => {
+      testform => 1,
+      testform_testfield => "test",
     },
-    input_values => $c->req->params,
+	session => $c->session,
   });
-
   if (my $result = $c->stash->{form}->result) {
     ... do stuff with $result ...
   }

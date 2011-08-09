@@ -1,3 +1,2 @@
 <textarea <@ INCLUDE form/field/idname.tt @><@ IF field.has_rows @> rows="<@ field.rows @>"<@ END @><@ IF field.has_cols @> cols="<@ field.cols @>"<@ END @>>
-<@ field.output_value FILTER html @>
-</textarea>
+<@ field.output_value FILTER html @></textarea>

@@ -1,5 +1,5 @@
-package HTML::EasyForm::Field::Datetime;
-# ABSTRACT: DateTime field
+package HTML::EasyForm::Field::Datetime::RFC3339;
+# ABSTRACT: DateTime field based on RFC3339 formatting (with timezone)
 
 use Moose;
 extends 'HTML::EasyForm::Field';
@@ -7,7 +7,7 @@ extends 'HTML::EasyForm::Field';
 use DateTime::Format::RFC3339;
 
 has '+widget' => (
-	default => sub { 'datetime' },
+	default => sub { 'text' },
 );
 
 sub input_to_value {
