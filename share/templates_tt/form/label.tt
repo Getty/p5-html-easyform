@@ -1,4 +1,4 @@
-<@ IF form.label @>
+<@ IF form.has_label @>
 	<div class="form_row form_label form_label_<@ form.name @>">
 		<@ form.label @>
 	</div>

@@ -1,0 +1,1 @@
+<input type="file" <@ INCLUDE form/field/idname.tt @> />

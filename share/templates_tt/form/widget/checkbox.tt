@@ -1,0 +1,1 @@
+<input type="checkbox" <@ INCLUDE form/field/idname.tt @> value="<@ field.checkbox_value @>"<@ IF field.output_value eq field.checkbox_value @> selected="selected"<@ END @>>

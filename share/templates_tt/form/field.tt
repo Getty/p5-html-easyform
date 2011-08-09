@@ -1,0 +1,17 @@
+<@ IF field.x.full @>
+	<@ INCLUDE $field.template_tt @>
+<@ ELSE @>
+	<div id="form_field_row_<@ field.name @>" class="form_row form_field_row">
+		<div id="form_field_label_<@ field.name @>" class="form_field_label form_field_label_<@ form.name @>" <@ IF field.x.vertical_cell || form.x.vertical_cell @> style="float:none"<@ END @>>
+			<@ PROCESS form/field/label.tt @>
+		</div>
+		<div id="form_field_widget_<@ field.name @>" class="form_field_widget form_field_widget_<@ form.name @>" <@ IF field.x.vertical_cell || form.x.vertical_cell @> style="float:none"<@ END @>>
+			<@ INCLUDE $field.template_tt @>
+		</div>
+	</div>
+<@ END @>
+<@ IF field.submit_errors @>
+	<div id="form_field_row_error_<@ field.name @>" class="form_row form_field_row_error">
+		<@ PROCESS form/field/error.tt @>
+	</div>
+<@ END @>

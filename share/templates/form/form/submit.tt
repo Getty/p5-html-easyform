@@ -1,7 +1,0 @@
-<@ IF !form.nosubmit @>
-	<div class="form_submit">
-		<input type="submit" id="<@ form.name @>" name="<@ form.name @>" value="<@ IF form.submitvalue @><@ form.submitvalue @><@ ELSE @>Submit<@ END @>" class="form_submit form_submit_<@ form.name @>"/>
-	</div>
-<@ ELSE @>
-	<input type="hidden" id="<@ form.name @>" name="<@ form.name @>" value="" />
-<@ END @>

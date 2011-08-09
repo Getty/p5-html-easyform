@@ -1,0 +1,2 @@
+<input type="reset" <@ INCLUDE form/field/idname.tt @> value="<@ field.output_value @>">
+

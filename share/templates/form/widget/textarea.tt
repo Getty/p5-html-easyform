@@ -1,3 +1,0 @@
-<textarea name="<@ field.html_name @>" id="<@ field.id @>" rows="<@ field.rows @>" cols="<@ field.cols @>">
-<@ field.fif @>
-</textarea>

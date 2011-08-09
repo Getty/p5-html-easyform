@@ -1,2 +1,0 @@
-<input type="reset" name="<@ field.html_name @>" id="<@ field.id @>" value="<@ field.fif @>">
-

@@ -1,1 +1,0 @@
-<form name="form_<@ form.name @>" id="form_<@ form.name @>" action="<@ form.action @>" method="<@ form.http_method || 'POST' @>"<@ IF form.enctype @> enctype="<@ form.enctype @>"<@ END @><@ IF form.css_class @> class="<@ form.css_class @>"<@ END @><@ IF form.style @> style="<@ form.style @>"<@ END @>><@ PROCESS form/base.tt @></form>

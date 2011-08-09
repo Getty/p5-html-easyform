@@ -1,1 +1,0 @@
-<input type="text" name="<@ field.html_name @>" id="<@ field.id @>" value="<@ field.fif @>">

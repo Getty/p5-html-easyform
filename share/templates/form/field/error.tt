@@ -1,5 +1,0 @@
-<div id="form_field_error_<@ field.id @>" class="form_field_error form_field_error_<@ form.id @>" style="color:red">
-	<@ FOREACH error IN field.errors @> 
-		<@ error @><br />
-	<@ END @>
-</div>

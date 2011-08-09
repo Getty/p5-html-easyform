@@ -1,1 +1,0 @@
-<input type="file" name="<@ field.html_name @>" id="<@ field.id @>" />

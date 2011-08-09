@@ -6,6 +6,7 @@ use Test::More;
 
 BEGIN {
     use_ok('HTML::EasyForm');
+    use_ok('HTML::EasyForm::Field');
 }
 
 done_testing;

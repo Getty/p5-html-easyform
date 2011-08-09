@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+	- complete rewrite
 
 0.001     2011-04-19 03:38:39 Europe/Berlin
 	- first experimentations

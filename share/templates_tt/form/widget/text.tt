@@ -1,0 +1,1 @@
+<input type="text" <@ INCLUDE form/field/idname.tt @> value="<@ field.output_value @>"<@ IF field.has_size @> size="<@ field.size @>"<@ END @>/>
