@@ -9,15 +9,6 @@ use File::ShareDir::ProjectDistDir;
 
 sub template_tt_dir { File::Spec->rel2abs( File::Spec->catfile( dist_dir('HTML-EasyForm'), 'templates_tt' ) ) };
 
-sub easy {
-	my $class = shift;
-	my %args;
-	%args = %{$_[0]} if (@_ == 1);
-	%args = @_ if (@_ > 1);
-	die __PACKAGE__." needs params" if !defined $args{params};
-	
-}
-
 has submit_label => (
 	is => 'rw',
 	lazy => 1,
@@ -92,7 +83,7 @@ In your L<Template::Toolkit> configuration:
 
 In your favorite web framework:
 
-  $c->stash->{form} = HTML::EasyForm->easy({
+  $c->stash->{form} = HTML::EasyForm->factory({
     name => 'testform',
     fields => [
       {
